@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <title>Sleep Tracker</title>
+  <meta name="description" content="Трекер циркадных ритмов и сна">
+  <meta name="theme-color" content="#0d0d1a">
+
+  <!-- Telegram Mini App SDK (ПЕРВЫМ!) -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <!-- Шрифт -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Стили -->
+  <link rel="stylesheet" href="/css/style.css">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
+</head>
+<body>
+
+<!-- ══ Нижний таббар ═══════════════════════════════════════════════════════ -->
+<nav class="tabbar" id="tabbar">
+  <button class="tab-btn active" data-tab="calculator" id="tab-calculator">
+    <span class="tab-ico">🧮</span>
+    <span class="tab-lbl">Калькулятор</span>
+  </button>
+  <button class="tab-btn" data-tab="tracker" id="tab-tracker">
+    <span class="tab-ico">📝</span>
+    <span class="tab-lbl">Запись</span>
+  </button>
+  <button class="tab-btn" data-tab="stats" id="tab-stats">
+    <span class="tab-ico">📊</span>
+    <span class="tab-lbl">Статистика</span>
+  </button>
+</nav>
+
+<!-- ══ Содержимое вкладок ══════════════════════════════════════════════════ -->
+<main class="main-content" id="main-content">
+
+  <!-- Вкладка 1: Калькулятор -->
+  <section class="tab-view active" id="view-calculator"></section>
+
+  <!-- Вкладка 2: Трекер -->
+  <section class="tab-view" id="view-tracker"></section>
+
+  <!-- Вкладка 3: Статистика -->
+  <section class="tab-view" id="view-stats"></section>
+
+</main>
+
+<script src="/js/calculator.js"></script>
+<script src="/js/tracker.js"></script>
+<script src="/js/stats.js"></script>
+<script src="/js/app.js"></script>
+
+</body>
+</html>
