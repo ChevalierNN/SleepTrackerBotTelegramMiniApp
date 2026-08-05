@@ -1,8 +1,3 @@
-"""
-Entry point — Sleep Tracker Bot.
-Запускает бота (polling) и веб-сервер Mini App одновременно.
-"""
-
 import asyncio
 import json
 import logging
@@ -27,7 +22,7 @@ from keyboards import main_menu
 from handlers import calculator, tracker, stats
 from server import run_server
 
-# ── UTF-8 logging для Windows ────────────────────────────────────────────────
+# UTF-8 
 _utf8_stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 logging.basicConfig(
     level=logging.INFO,
@@ -37,7 +32,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-# ── Авто-прокси из реестра Windows ──────────────────────────────────────────
+# Авто-прокси из реестра Windows 
 
 def _get_windows_proxy() -> str | None:
     if sys.platform != "win32":
@@ -59,15 +54,13 @@ def _get_windows_proxy() -> str | None:
     return None
 
 
-# ── Startup hook ─────────────────────────────────────────────────────────────
+# Startup hook 
 
 async def on_startup(bot: Bot) -> None:
     await init_db()
     me = await bot.get_me()
     logger.info("Bot started: @%s", me.username)
 
-    # Устанавливаем Menu Button (кнопка слева от поля ввода в Telegram)
-    # Открывает Mini App одним нажатием
     try:
         await bot.set_chat_menu_button(
             menu_button=MenuButtonWebApp(
@@ -80,7 +73,7 @@ async def on_startup(bot: Bot) -> None:
         logger.warning("Could not set menu button: %s", e)
 
 
-# ── Общие хэндлеры ───────────────────────────────────────────────────────────
+# Общие хэндлеры 
 
 async def cmd_start(message: Message) -> None:
     name = message.from_user.first_name if message.from_user else "друг"
@@ -114,7 +107,7 @@ async def back_to_main_handler(callback: CallbackQuery) -> None:
     await callback.answer()
 
 
-# ── Mini App data handler (sendData fallback) ────────────────────────────────
+# Mini App data handler
 
 async def handle_webapp_data(message: Message) -> None:
     """
@@ -157,7 +150,7 @@ async def handle_webapp_data(message: Message) -> None:
     )
 
 
-# ── Сборка и запуск ──────────────────────────────────────────────────────────
+# Сборка и запуск 
 
 async def main() -> None:
     proxy   = _get_windows_proxy()
@@ -178,7 +171,7 @@ async def main() -> None:
     dp.message.register(handle_webapp_data, F.web_app_data)
     dp.callback_query.register(back_to_main_handler, F.data == "back_main")
 
-    # Роутеры модулей (текстовый режим)
+    # Роутеры модулей 
     dp.include_router(calculator.router)
     dp.include_router(tracker.router)
     dp.include_router(stats.router)

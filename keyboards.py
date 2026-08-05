@@ -6,7 +6,7 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, WebAppInfo
 from config import WEBAPP_URL
 
 
-# ── Главное меню ──────────────────────────────────────────────
+# Главное меню
 def main_menu() -> InlineKeyboardMarkup:
     return InlineKeyboardMarkup(inline_keyboard=[
         # Mini App — полный трекер в красивом UI
@@ -23,7 +23,7 @@ def main_menu() -> InlineKeyboardMarkup:
     ])
 
 
-# ── Калькулятор ───────────────────────────────────────────────
+# Калькулятор 
 def calculator_menu() -> InlineKeyboardMarkup:
     return InlineKeyboardMarkup(inline_keyboard=[
         [InlineKeyboardButton(text="😴 Лечь сейчас",  callback_data="calc_sleep_now")],
@@ -39,7 +39,7 @@ def back_to_calculator() -> InlineKeyboardMarkup:
     ])
 
 
-# ── Трекер ────────────────────────────────────────────────────
+# Трекер 
 def quality_keyboard() -> InlineKeyboardMarkup:
     return InlineKeyboardMarkup(inline_keyboard=[
         [

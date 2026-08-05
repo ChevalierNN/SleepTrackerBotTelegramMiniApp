@@ -1,15 +1,3 @@
-"""
-Mini App web server.
-
-Endpoints:
-  GET  /               → webapp/index.html (SPA)
-  GET  /css/*          → static CSS
-  GET  /js/*           → static JS
-  GET  /api/stats      → JSON sleep data for charts
-  POST /api/sleep      → save a sleep record from Mini App
-  OPTIONS /*           → CORS preflight
-"""
-
 import asyncio
 import json
 import logging
@@ -25,7 +13,7 @@ from database import get_week_records, get_all_records, save_record
 logger = logging.getLogger(__name__)
 WEBAPP_DIR = os.path.join(os.path.dirname(__file__), "webapp")
 
-# ── CORS helper ───────────────────────────────────────────────────────────────
+# CORS helper 
 
 CORS = {
     "Access-Control-Allow-Origin":  "*",
@@ -38,7 +26,7 @@ async def cors_preflight(request: web.Request) -> web.Response:
     return web.Response(headers=CORS)
 
 
-# ── GET /api/stats ────────────────────────────────────────────────────────────
+# GET /api/stats ─
 
 async def api_stats(request: web.Request) -> web.Response:
     uid_str = request.rel_url.query.get("user_id", "")
@@ -61,7 +49,7 @@ async def api_stats(request: web.Request) -> web.Response:
         return web.json_response({"error": "internal server error"}, status=500, headers=CORS)
 
 
-# ── POST /api/sleep ───────────────────────────────────────────────────────────
+# POST /api/sleep 
 
 async def api_save_sleep(request: web.Request) -> web.Response:
     """
@@ -98,13 +86,13 @@ async def api_save_sleep(request: web.Request) -> web.Response:
         return web.json_response({"error": "db error"}, status=500, headers=CORS)
 
 
-# ── Static / SPA ──────────────────────────────────────────────────────────────
+# Static / SPA 
 
 async def serve_index(_: web.Request) -> web.FileResponse:
     return web.FileResponse(os.path.join(WEBAPP_DIR, "index.html"))
 
 
-# ── App factory ───────────────────────────────────────────────────────────────
+# App factory 
 
 def create_app() -> web.Application:
     app = web.Application()
@@ -127,7 +115,7 @@ def create_app() -> web.Application:
     return app
 
 
-# ── Async runner ──────────────────────────────────────────────────────────────
+# Async runner 
 
 async def run_server() -> None:
     """Start aiohttp and block until cancelled."""
@@ -143,7 +131,7 @@ async def run_server() -> None:
         await runner.cleanup()
 
 
-# ── Standalone ────────────────────────────────────────────────────────────────
+# Standalone 
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")

@@ -1,8 +1,3 @@
-"""
-Database layer using aiosqlite.
-All DB operations are async-safe.
-"""
-
 import aiosqlite
 from datetime import date, datetime
 

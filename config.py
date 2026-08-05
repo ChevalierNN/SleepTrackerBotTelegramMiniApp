@@ -5,7 +5,7 @@ load_dotenv()
 
 BOT_TOKEN: str = os.getenv("BOT_TOKEN", "")
 
-# Mini App — публичный HTTPS URL (ngrok / свой домен)
+# Mini App — публичный HTTPS URL
 WEBAPP_URL: str = os.getenv("WEBAPP_URL", "http://localhost:8085").rstrip("/")
 
 # Локальный сервер для раздачи Mini App
